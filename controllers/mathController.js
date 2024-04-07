@@ -1,6 +1,5 @@
 const mathController = {
     calculate: async (req, res) => {
-        console.log(req.body)
 
         const { num1, num2, method } = req.body
 
