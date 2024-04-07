@@ -6,6 +6,10 @@ const authController = {
         // Gerando token jwt
         const token = jwt.sign({ username: 'math_user' }, secretKey, { expiresIn: '1h' });
         res.json({ token: 'Bearer ' + token });
+    },
+
+    validate: async (req, res) => {
+        res.status(200).send({msg: "Token is valid"})
     }
 }
 
