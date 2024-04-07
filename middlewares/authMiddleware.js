@@ -1,13 +1,14 @@
 const jwt = require('jsonwebtoken');
-const { secretKey } = require('./config');
+const { secretKey } = require('../config');
 
-module.exports = function (req, res, next) {
+function authMiddleware (req, res, next) {
     // Pegando token do header
-    const token = req.header('Authorization');
+    const authHeader = req.header('Authorization');
 
     // Checando se há um token
+    const token = authHeader.split(' ')[1];
     if (!token) {
-        return res.status(401).json({ msg: 'No token, authorization denied' });
+      return res.status(401).json({ msg: 'Invalid token format, authorization denied' });
     }
 
     try {
@@ -21,3 +22,5 @@ module.exports = function (req, res, next) {
         res.status(401).json({ msg: 'Token is not valid' });
     }
 };
+
+module.exports = authMiddleware

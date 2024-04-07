@@ -8,7 +8,7 @@ const { secretKey } = require('../config');
 router.get('/login', (req, res) => {
     // Gerando token jwt
     const token = jwt.sign({ username: 'example_user' }, secretKey, { expiresIn: '1h' });
-    res.json({ token });
+    res.json({ token: 'Bearer ' + token });
 });
 
 module.exports = router;
